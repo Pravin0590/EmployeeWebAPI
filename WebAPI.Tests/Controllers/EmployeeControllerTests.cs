@@ -181,7 +181,7 @@ namespace WebAPI.Tests.Controllers
 
             //Assert
              Assert.IsType<BadRequestObjectResult>(badResponse);
-            _mockEmployeeService.Verify(v => v.CheckEmployeeAlreadyExistsAsync(It.IsAny<Employee>()), Times.Never);
+            _mockEmployeeService.Verify(v => v.CheckEmployeeAlreadyExistsAsync(It.IsAny<Employee>()), Times.Once);
             _mockEmployeeService.Verify(v => v.CreateAsync(It.IsAny<Employee>()), Times.Never);
         }
 
