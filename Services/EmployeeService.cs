@@ -54,11 +54,12 @@ namespace Services
 
         public async Task<int> UpdateAsync(Employee employee)
         {
-            _employeeContext.Entry(employee).CurrentValues.SetValues(employee);
-
             var employeeFromDB = await _employeeContext.Employees.Where(e => e.Id == employee.Id)
                                                              .Include(e => e.Addresses)
                                                              .SingleAsync();
+
+            _employeeContext.Entry(employeeFromDB).CurrentValues.SetValues(employee);
+
 
             //Handle if any address is removed/deleted
             DeleteEmployeeAddressIfAny(employee, employeeFromDB);
